@@ -9,7 +9,7 @@ export default function Hero() {
   const line2 = useTypingEffect("Senior OutSystems Developer", 60, 1500);
   const line3 = useTypingEffect("cat about.txt", 80, 3000);
   const line4 = useTypingEffect(
-    "5+ years building enterprise applications with OutSystems...",
+    "7+ years building enterprise applications with OutSystems...",
     40,
     4000,
   );
