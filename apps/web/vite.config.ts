@@ -13,9 +13,14 @@ import { restart } from './plugins/restart';
 import { restartEnvFileChange } from './plugins/restartEnvFileChange';
 
 export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? `/${process.env.GITHUB_REPOSITORY?.split('/')[1] || 'Portfolio'}/` : '/',
+  base:
+    process.env.NODE_ENV === 'production'
+      ? process.env.GITHUB_REPOSITORY?.split('/')[1]?.endsWith('.github.io')
+        ? '/'
+        : `/${process.env.GITHUB_REPOSITORY?.split('/')[1] || 'Portfolio'}/`
+      : '/',
   // Keep them available via import.meta.env.NEXT_PUBLIC_*
-  envPrefix: 'NEXT_PUBLIC_',
+  envPrefix: 'NEXT_PUBLIC_', 
   optimizeDeps: {
     // Explicitly include fast-glob, since it gets dynamically imported and we
     // don't want that to cause a re-bundle.
