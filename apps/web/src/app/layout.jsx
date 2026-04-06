@@ -12,7 +12,7 @@ const queryClient = new QueryClient({
 });
 
 export const metadata = {
-  title: "Adrian Villamor | Senior OutSystems Developer",
+  title: "Ace Villamor - Senior OutSystems Developer",
   description:
     "Senior OutSystems Developer with 7+ years of experience designing, building, and optimizing enterprise applications. Specialized in OutSystems Reactive, SQL Server, and API integrations.",
 };

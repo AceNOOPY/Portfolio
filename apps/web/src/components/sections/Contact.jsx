@@ -64,24 +64,23 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      // For static deployment, create a mailto link
+      const subject = `Portfolio Contact: ${formData.name}`;
+      const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
+      const mailtoLink = `mailto:ace.villamor008@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to send message");
-      }
+      // Open email client
+      window.open(mailtoLink, '_blank');
 
       setIsSuccess(true);
       setFormData({ name: "", email: "", message: "" });
+
+      // Reset success message after 5 seconds
+      setTimeout(() => setIsSuccess(false), 5000);
+
     } catch (error) {
       console.error("Contact form error:", error);
-      setErrorMessage(
-        error.message || "Failed to send message. Please try again.",
-      );
+      setErrorMessage("Failed to open email client. Please contact directly at ace.villamor008@gmail.com");
     } finally {
       setIsSubmitting(false);
     }
@@ -112,10 +111,10 @@ export default function Contact() {
             />
             <div style={{ fontFamily: "JetBrains Mono, monospace" }}>
               <p className="text-[var(--accent)] mb-2">
-                &gt; Message sent successfully
+                &gt; Email client opened
               </p>
               <p className="text-[var(--muted)] text-sm">
-                Thank you for reaching out. I'll get back to you soon.
+                Your email client has been opened with the message details. Please send the email to complete your message.
               </p>
             </div>
             <button
@@ -140,8 +139,8 @@ export default function Contact() {
         className="max-w-2xl mx-auto"
       >
         <p className="text-[var(--muted)] mb-8 text-center">
-          Have a project in mind or want to discuss opportunities? Let's
-          connect.
+          Have a project in mind or want to discuss opportunities? Fill out the form below
+          and your email client will open with a pre-filled message.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4" aria-live="polite">
