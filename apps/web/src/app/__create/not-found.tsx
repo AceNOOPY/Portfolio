@@ -1,63 +1,26 @@
-import fg from 'fast-glob';
-import type { Route } from './+types/not-found';
 import { useNavigate } from 'react-router';
-import { useCallback, useEffect, useState } from 'react';
 
-export async function loader({ params }: Route.LoaderArgs) {
-  const matches = await fg('src/**/page.{js,jsx,ts,tsx}');
-  return {
-    path: `/${params['*']}`,
-    pages: matches
-      .sort((a, b) => a.length - b.length)
-      .map((match) => {
-        const url = match.replace('src/app', '').replace(/\/page\.(js|jsx|ts|tsx)$/, '') || '/';
-        const path = url.replaceAll('[', '').replaceAll(']', '');
-        const displayPath = path === '/' ? 'Homepage' : path;
-        return { url, path: displayPath };
-      }),
-  };
-}
-
-interface ParentSitemap {
-  webPages?: Array<{
-    id: string;
-    name: string;
-    filePath: string;
-    cleanRoute?: string;
-  }>;
-}
-
-export default function CreateDefaultNotFoundPage({
-  loaderData,
-}: {
-  loaderData: Awaited<ReturnType<typeof loader>>;
-}) {
-  const [siteMap, setSitemap] = useState<ParentSitemap | null>(null);
+export default function NotFoundPage() {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.parent && window.parent !== window) {
-      const handler = (event: MessageEvent) => {
-        if (event.data.type === 'sandbox:sitemap') {
-          window.removeEventListener('message', handler);
-          setSitemap(event.data.sitemap);
-        }
-      };
-
-      window.parent.postMessage(
-        {
-          type: 'sandbox:sitemap',
-        },
-        '*'
-      );
-      window.addEventListener('message', handler);
-
-      return () => {
-        window.removeEventListener('message', handler);
-      };
-    }
-  }, []);
-  const missingPath = loaderData.path.replace(/^\//, '');
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="text-center">
+        <h1 className="text-6xl font-bold text-gray-900 mb-4">404</h1>
+        <h2 className="text-2xl font-semibold text-gray-700 mb-6">Page Not Found</h2>
+        <p className="text-gray-600 mb-8">
+          The page you're looking for doesn't exist.
+        </p>
+        <button
+          onClick={() => navigate('/')}
+          className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors"
+        >
+          Go Home
+        </button>
+      </div>
+    </div>
+  );
+}
   const existingRoutes = loaderData.pages.map((page) => ({
     path: page.path,
     url: page.url,
