@@ -108,7 +108,7 @@ export default function Hero() {
           className="flex gap-4 mt-8"
         >
           <a
-            href="https://github.com/adrianvillamor"
+            href="https://github.com/AceNOOPY"
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 border border-[var(--border)] transition-smooth hover:border-[var(--accent)] hover:text-[var(--accent)]"
