@@ -6,6 +6,10 @@ import Certifications from "@/components/sections/Certifications";
 import Education from "@/components/sections/Education";
 import Contact from "@/components/sections/Contact";
 
+export const meta = () => [
+  { title: "Ace Villamor - Senior OutSystems Developer" },
+];
+
 export default function Home() {
   return (
     <main className="min-h-screen">
