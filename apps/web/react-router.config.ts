@@ -2,6 +2,6 @@ import type { Config } from '@react-router/dev/config';
 
 export default {
 	appDirectory: './src/app',
-	ssr: true,
-	prerender: ['/*?'],
+	ssr: false, // Disable SSR for static GitHub Pages deployment
+	prerender: ['/*'],
 } satisfies Config;

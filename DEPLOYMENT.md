@@ -29,7 +29,8 @@ npm run build
 
 ### Important Notes
 
-- **Server-side features**: This deployment only includes the client-side build. Server-side features (API routes, authentication, database) won't work on GitHub Pages.
+- **Static deployment**: The web app has been configured for static hosting on GitHub Pages. Server-side rendering (SSR) has been disabled.
+- **Server-side features**: API routes, authentication, and database functionality won't work on GitHub Pages since it's static hosting only.
 - **Environment variables**: Some features may require backend services that aren't available in the static deployment.
 - **Mobile app**: The mobile app in `apps/mobile/` needs to be deployed separately through app stores or Expo.
 
@@ -43,6 +44,14 @@ npm run dev
 # Mobile app
 cd apps/mobile
 npm run start
+```
+
+### Local Testing (Built Version)
+
+```bash
+cd apps/web
+npm run build    # Build for production
+npm run preview  # Test the built static version locally
 ```
 
 ### Troubleshooting
