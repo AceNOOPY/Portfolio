@@ -36,6 +36,10 @@ import type { Route } from './+types/root';
 
 export const links = () => [];
 
+export const meta = () => [
+  { title: "Ace Villamor - Senior OutSystems Developer" },
+];
+
 if (globalThis.window && globalThis.window !== undefined) {
   globalThis.window.fetch = fetch;
 }
@@ -406,6 +410,12 @@ export function Layout({ children }: { children: ReactNode }) {
   const location = useLocation();
   const pathname = location?.pathname;
   const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+  
+  // Set the document title
+  useEffect(() => {
+    document.title = "Ace Villamor - Senior OutSystems Developer";
+  }, []);
+  
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       if (event.data.type === 'sandbox:navigation') {
