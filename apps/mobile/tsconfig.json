@@ -1,4 +1,5 @@
 {
+  // TypeScript configuration for Expo React Native app
   "compilerOptions": {
     "target": "esnext",
     "lib": ["dom", "esnext"],
@@ -9,7 +10,8 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
+    "ignoreDeprecations": "6.0",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
